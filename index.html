@@ -149,7 +149,7 @@
 
 	function doGet(file) {
 		$.ajax({
-            url: "URL to get a file's content",
+            url: "http://477-27.csse.rose-hulman.edu:8004/file.txt",
             data: {},
             success: function(result) {
 				html = file + "'s content: <br />";
@@ -164,7 +164,7 @@
 	
 	function doPut(file) {
 		$.ajax({
-            url: "URL to put to a file",
+            url: "http://477-27.csse.rose-hulman.edu:8004/file.txt",
             data: {},
             success: function(result) {
 				$("#putBody").html("");
@@ -179,7 +179,7 @@
 	
 	function doPost(file) {
 		$.ajax({
-            url: "URL to post to a file",
+            url: "http://477-27.csse.rose-hulman.edu:8004/file.txt",
             data: {},
             success: function(result) {
 				$("#postBody").html("");
@@ -194,7 +194,7 @@
 	
 	function doDelete(file) {
 		$.ajax({
-            url: "URL to delete a file",
+            url: "http://477-27.csse.rose-hulman.edu:8004/file.txt",
             data: {},
             success: function(result) {
                 html = file + " deleted";
@@ -208,12 +208,12 @@
 	}
 	
 	function setUp() {
-		$.ajax({
-            url: "URL to get all of the files",
+		$.get({
+            url: "http://477-27.csse.rose-hulman.edu:8004/file.txt",
             data: {},
             success: function(result) {
+				console.log("Result: " + result);
                 var array = result.Results;
-                console.log(array);
 				// TODO: populate the get dropdown and delete dropdown
 				getHTML = ""
 				deleteHTML = ""
