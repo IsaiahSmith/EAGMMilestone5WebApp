@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Milestone 5</title>
+		<link href="styles.css" type="text/css" rel="stylesheet" />
+		<script src="http://code.jquery.com/jquery-2.1.4.js"></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	</head>
+
+	<body style="background-color: #b3c6ff">
+		<div class="row">
+            <div class="col-md-12">
+				<h1>#EAGM</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+            <div class="col-md-8">
+				<h3>GET</h3>
+				<div class="dropdown">
+					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose File
+					<span class="caret"></span></button>
+					<ul class="dropdown-menu" id="getDropdown">
+						<!-- Need to take these out -->
+						<li><a onclick="doGet('File1')">File1</a></li>
+						<li><a onclick="doGet('File2')">File2</a></li>
+						<li><a onclick="doGet('File3')">File3</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-2">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+            <div class="col-md-8">
+				<div>
+					<p id="getResult"></p>
+				</div>
+			</div>
+			<div class="col-md-2">
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<h3>PUT</h3>
+				<div class="form-group">
+					<label for="comment">Body:</label>
+					<textarea class="form-control" rows="5" id="putBody"></textarea>
+					<button type="button" class="btn btn-primary btn-md" onclick="doPut()">Submit</button>
+				</div>
+			</div>
+			<div class="col-md-2">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+            <div class="col-md-8">
+				<div>
+					<p id="putResult"></p>
+				</div>
+			</div>
+			<div class="col-md-2">
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<h3>POST</h3>
+				<div class="form-group">
+					<label for="comment">Body:</label>
+					<textarea class="form-control" rows="5" id="postBody"></textarea>
+					<button type="button" class="btn btn-primary btn-md" onclick="doPost()">Submit</button>
+				</div>
+			</div>
+			<div class="col-md-2">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+            <div class="col-md-8">
+				<div>
+					<p id="postResult"></p>
+				</div>
+			</div>
+			<div class="col-md-2">
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<h3>DELETE</h3>
+				<div class="dropdown">
+					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose File
+					<span class="caret"></span></button>
+					<ul class="dropdown-menu" id="deleteDropdown">
+						<!-- Need to take these out -->
+						<li><a onclick="doDelete('File1')">File1</a></li>
+						<li><a onclick="doDelete('File1')">File2</a></li>
+						<li><a onclick="doDelete('File1')">File3</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-2">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+            <div class="col-md-8">
+				<div>
+					<p id="deleteResult"></p>
+				</div>
+			</div>
+			<div class="col-md-2">
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	$(document).ready(function (){
+		setUp();
+	}
+
+	function doGet(file) {
+		$.post({
+            url: "URL to get a file's content",
+            data: {},
+            success: function(result) {
+				html = "";
+                $("#getResult").html(html);
+            }
+        });
+	}
+	
+	function doPut(file) {
+		$.post({
+            url: "URL to put to a file",
+            data: {},
+            success: function(result) {
+                html = "";
+                $("#putResult").html(html);
+            }
+        });
+	}
+	
+	function doPost(file) {
+		$.post({
+            url: "URL to post to a file",
+            data: {},
+            success: function(result) {
+                html = "";
+                $("#postResult").html(html);
+            }
+        });
+	}
+	
+	function doDelete(file) {
+		$.post({
+            url: "URL to delete a file",
+            data: {},
+            success: function(result) {
+                html = "";
+                $("#deleteResult").html(html);
+            }
+        });
+		setUp();
+	}
+	
+	function setUp() {
+		$.post({
+            url: "URL to get all of the files",
+            data: {},
+            success: function(result) {
+                var array = result.Results;
+                console.log(array);
+				// TODO: populate the get dropdown and delete dropdown
+				getHTML = ""
+				deleteHTML = ""
+				for (var i = 0; i < array.length; i++) {
+					getHTML += "<li><a onclick='doGet(\"" + array[i].name + "\")'>" + array[i].name + "</a></li>";
+					deleteHTML += "<li><a onclick='doDelete(\"" + array[i].name + "\")'>" + array[i].name + "</a></li>";
+				}
+				$("#getDropdown").html(getHTML);
+				$("#deleteDropdown").html(deleteHTML);
+            }
+        });
+	}
+</script>
