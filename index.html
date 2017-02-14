@@ -56,6 +56,7 @@
 				<div class="form-group">
 					<label for="comment">Body:</label>
 					<textarea class="form-control" rows="5" id="putBody"></textarea>
+					<br />
 					<button type="button" class="btn btn-primary btn-md" onclick="doPut()">Submit</button>
 				</div>
 			</div>
@@ -82,6 +83,7 @@
 				<div class="form-group">
 					<label for="comment">Body:</label>
 					<textarea class="form-control" rows="5" id="postBody"></textarea>
+					<br />
 					<button type="button" class="btn btn-primary btn-md" onclick="doPost()">Submit</button>
 				</div>
 			</div>
@@ -130,60 +132,83 @@
 			<div class="col-md-2">
 			</div>
 		</div>
+		
+		<div class="row">
+			<div class="col-md-12">
+				<div style="text-align: center; margin: 50px;">
+					Copyright &copy; 2017
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
 <script>
 	$(document).ready(function (){
 		setUp();
-	}
+	})
 
 	function doGet(file) {
-		$.post({
+		$.ajax({
             url: "URL to get a file's content",
             data: {},
             success: function(result) {
-				html = "";
+				html = file + "'s content: <br />";
+				
                 $("#getResult").html(html);
+            },
+			error: function() {
+                $("#getResult").html("GET failed");
             }
         });
 	}
 	
 	function doPut(file) {
-		$.post({
+		$.ajax({
             url: "URL to put to a file",
             data: {},
             success: function(result) {
-                html = "";
+				$("#putBody").html("");
+                html = "Put in " + file + "<br />";
                 $("#putResult").html(html);
+            },
+			error: function() {
+                $("#putResult").html("PUT failed");
             }
         });
 	}
 	
 	function doPost(file) {
-		$.post({
+		$.ajax({
             url: "URL to post to a file",
             data: {},
             success: function(result) {
-                html = "";
+				$("#postBody").html("");
+                html = "Posted to " + file + "<br />";
                 $("#postResult").html(html);
+            },
+			error: function() {
+                $("#postResult").html("POST failed");
             }
         });
 	}
 	
 	function doDelete(file) {
-		$.post({
+		$.ajax({
             url: "URL to delete a file",
             data: {},
             success: function(result) {
-                html = "";
+                html = file + " deleted";
                 $("#deleteResult").html(html);
+            },
+			error: function() {
+                $("#deleteResult").html("DELETE failed");
             }
         });
 		setUp();
 	}
 	
 	function setUp() {
-		$.post({
+		$.ajax({
             url: "URL to get all of the files",
             data: {},
             success: function(result) {
