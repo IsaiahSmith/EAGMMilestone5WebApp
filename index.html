@@ -152,12 +152,18 @@
             url: "http://477-27.csse.rose-hulman.edu:8004/file.txt",
             data: {},
             success: function(result) {
+				$("#getResult").html("");
 				html = file + "'s content: <br />";
+				// TODO: use result to get the file contents
+				// TODO: add those contents to the html string initialized
 				
                 $("#getResult").html(html);
             },
 			error: function() {
                 $("#getResult").html("GET failed");
+				setTimeout(function(){
+				$("#getResult").html("");
+				}, 2000);
             }
         });
 	}
@@ -165,7 +171,8 @@
 	function doPut(file) {
 		$.ajax({
             url: "http://477-27.csse.rose-hulman.edu:8004/file.txt",
-            data: {},
+            data: {//this is where the body of the put goes
+			},
             success: function(result) {
 				$("#putBody").html("");
                 html = "Put in " + file + "<br />";
@@ -173,6 +180,9 @@
             },
 			error: function() {
                 $("#putResult").html("PUT failed");
+				setTimeout(function(){
+				$("#putResult").html("");
+				}, 2000);
             }
         });
 	}
@@ -180,7 +190,8 @@
 	function doPost(file) {
 		$.ajax({
             url: "http://477-27.csse.rose-hulman.edu:8004/file.txt",
-            data: {},
+            data: {//this is where the body of the post goes
+			},
             success: function(result) {
 				$("#postBody").html("");
                 html = "Posted to " + file + "<br />";
@@ -188,6 +199,9 @@
             },
 			error: function() {
                 $("#postResult").html("POST failed");
+				setTimeout(function(){
+				$("#postResult").html("");
+				}, 2000);
             }
         });
 	}
@@ -197,11 +211,15 @@
             url: "http://477-27.csse.rose-hulman.edu:8004/file.txt",
             data: {},
             success: function(result) {
-                html = file + " deleted";
+                $("#deleteResult").html("");
+				html = file + " deleted";
                 $("#deleteResult").html(html);
             },
 			error: function() {
                 $("#deleteResult").html("DELETE failed");
+				setTimeout(function(){
+				$("#deleteResult").html("");
+				}, 2000);
             }
         });
 		setUp();
