@@ -149,6 +149,7 @@
 
 	function doGet(file) {
 		$.ajax({
+			type: "GET",
             url: "http://477-27.csse.rose-hulman.edu:8004/file.txt",
             data: {},
             success: function(result) {
@@ -163,70 +164,92 @@
                 $("#getResult").html("GET failed");
 				setTimeout(function(){
 				$("#getResult").html("");
-				}, 2000);
+				}, 3000);
             }
         });
 	}
 	
 	function doPut(file) {
-		$.ajax({
-            url: "http://477-27.csse.rose-hulman.edu:8004/file.txt",
-            data: {//this is where the body of the put goes
-			},
-            success: function(result) {
-				$("#putBody").html("");
-                html = "Put in " + file + "<br />";
-                $("#putResult").html(html);
-            },
-			error: function() {
-                $("#putResult").html("PUT failed");
-				setTimeout(function(){
-				$("#putResult").html("");
-				}, 2000);
-            }
-        });
+		var body = $("#putBody").text();
+		if (body == null) {
+			$("#putResult").html("You must give a body for the POST request");
+			setTimeout(function(){
+			$("#putResult").html("");
+			}, 3000);
+		} else {
+			$.ajax({
+				type: "POST",
+				url: "http://477-27.csse.rose-hulman.edu:8004/file.txt",
+				data: {//this is where the body of the put goes
+					body
+				},
+				success: function(result) {
+					$("#putBody").html("");
+					html = "Put in " + file + "<br />";
+					$("#putResult").html(html);
+				},
+				error: function() {
+					$("#putResult").html("PUT failed");
+					setTimeout(function(){
+					$("#putResult").html("");
+					}, 3000);
+				}
+			});
+		}
 	}
 	
 	function doPost(file) {
-		$.ajax({
-            url: "http://477-27.csse.rose-hulman.edu:8004/file.txt",
-            data: {//this is where the body of the post goes
-			},
-            success: function(result) {
-				$("#postBody").html("");
-                html = "Posted to " + file + "<br />";
-                $("#postResult").html(html);
-            },
-			error: function() {
-                $("#postResult").html("POST failed");
-				setTimeout(function(){
-				$("#postResult").html("");
-				}, 2000);
-            }
-        });
+		var body = $("#postBody").text();
+		if (body == null) {
+			$("#postResult").html("You must give a body for the POST request");
+			setTimeout(function(){
+			$("#postResult").html("");
+			}, 3000);
+		} else {
+			$.ajax({
+				type: "POST",
+				url: "http://477-27.csse.rose-hulman.edu:8004/file.txt",
+				data: {//this is where the body of the post goes
+					body
+				},
+				success: function(result) {
+					$("#postBody").html("");
+					html = "Posted to " + file + "<br />";
+					$("#postResult").html(html);
+				},
+				error: function() {
+					$("#postResult").html("POST failed");
+					setTimeout(function(){
+					$("#postResult").html("");
+					}, 3000);
+				}
+			});
+		}
 	}
 	
 	function doDelete(file) {
 		$.ajax({
+			type: "POST",
             url: "http://477-27.csse.rose-hulman.edu:8004/file.txt",
             data: {},
             success: function(result) {
                 $("#deleteResult").html("");
 				html = file + " deleted";
                 $("#deleteResult").html(html);
+				setUp();
             },
 			error: function() {
                 $("#deleteResult").html("DELETE failed");
 				setTimeout(function(){
 				$("#deleteResult").html("");
-				}, 2000);
+				}, 3000);
             }
         });
-		setUp();
 	}
 	
 	function setUp() {
 		$.get({
+			type: "GET",
             url: "http://477-27.csse.rose-hulman.edu:8004/file.txt",
             data: {},
             success: function(result) {
